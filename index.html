@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Tennis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(26, 122, 142, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(26, 122, 142, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            margin-bottom: 60px;
+            animation: fadeInScale 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                0 10px 40px rgba(26, 122, 142, 0.12),
+                0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 42px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(26, 122, 142, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 60px rgba(26, 122, 142, 0.18),
+                0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo svg {
+            width: 120px;
+            height: 120px;
+        }
+
+        .content {
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        h1 {
+            color: #1A7A8E;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+            text-transform: lowercase;
+        }
+        
+        h1 .dot {
+            color: #6c757d;
+            font-weight: 400;
+            padding: 0 8px;
+        }
+
+        .domain {
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .domain a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .domain a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1A7A8E, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .domain a:hover {
+            color: #1A7A8E;
+        }
+
+        .domain a:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(5deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+            .logo svg {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0,1024) scale(0.1,-0.1)" fill="#1A7A8E" stroke="none">
+                        <path d="M0 5150 l0 -5089 30 -16 c38 -20 37 -20 56 18 48 94 152 225 308 385c59 60 87 82 106 82 28 0 82 -30 123 -68 l27 -26 52 60 c29 32 78 86 109 119 231 248 431 558 542 840 167 429 275 866 377 1530 47 306 59 388 74 505 24 182 57 429 106 780 54 385 141 749 257 1080 147 420 418 907 708 1270 778 976 1835 1509 2925 1477 714 -21 1359 -291 1843 -770 242 -240 377 -426 522 -722 136 -277 212 -535 257 -870 31 -227 31 -566 0 -785 -89 -631 -352 -1253 -736 -1744 -247 -315 -507 -570 -866 -848 -257 -198 -737 -473 -1065 -608 -55 -22 -226 -76 -380 -119 -356 -100 -479 -135 -585 -166 -47 -13 -186 -49 -310 -80 -830 -208 -937 -236 -1236 -330 -405 -128 -779 -299 -1049 -478 -225 -151 -375 -280 -567 -489 l-80 -88 4346 0 4346 0 0 5120 0 5120 -5120 0 -5120 0 0 -5090z"/>
+                        <path d="M5485 7320 c-459 -47 -911 -214 -1295 -478 -229 -158 -566 -474 -744 -697c-190 -239 -385 -563 -488 -813 -311 -757 -374 -1425 -193 -2037 128 -435 518 -845 930 -978 256 -83 387 -101 740 -101 264 -1 274 0 435 31 178 35 225 50 545 171 355 134 499 206 778 388 286 187 413 292 664 545 274 277 450 530 600 863 171 381 241 741 230 1178 -14 534 -155 950 -430 1271 -308 359 -656 554 -1132 637 -135 23 -499 35 -640 20z m-179 -1105 c243 -42 531 -178 688 -324 75 -71 196 -226 196 -253 0 -40 -102 -195 -193 -293 -215 -231 -503 -416 -731 -470 -428 -101 -786 -22 -1059 234 -73 69 -119 142 -152 240 -35 103 -40 159 -21 217 35 107 242 337 397 441 102 69 257 146 359 177 143 45 360 57 516 31z m1032 -902 c23 -139 27 -349 7 -467 -47 -281 -151 -483 -354 -687 -203 -203 -388 -303 -663 -359 -107 -22 -352 -27 -423 -9 -22 5 -56 12 -76 14 -57 7 -188 51 -269 92 -110 56 -209 125 -303 213 -112 105 -154 163 -225 305 -117 234 -156 402 -157 672 0 121 4 176 12 184 13 13 15 10 48 -84 59 -168 318 -383 568 -472 182 -65 381 -87 605 -66 383 35 866 321 1132 671 50 66 73 91 78 85 3 -2 11 -44 20 -92z"/>
+                        <path d="M2370 2555 c0 -22 -35 -234 -56 -335 -58 -285 -108 -480 -188 -724 -20 -60 -36 -110 -36 -112 0 -2 66 30 148 70 232 116 566 241 860 322 34 9 62 20 62 24 0 4 -24 20 -52 35 -73 39 -262 174 -350 250 -122 105 -288 304 -348 418 -28 51 -40 67 -40 52z"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>visualize <span class="dot">.</span> compare <span class="dot">.</span> improve</h1>
+        </div>
+
+        <div class="domain">
+            <a href="https://visual.tennis">visual.tennis</a>
+        </div>
+    </div>
+</body>
+</html>
